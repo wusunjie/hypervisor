@@ -1,10 +1,10 @@
 ifeq ($(ARCH_TYPE), cortex-m4)
 
-include cortex-m4/common.mk
+CURRENT_DIR:=$(shell pwd)/build
+
+include $(CURRENT_DIR)/cortex-m4/common.mk
 ifeq ($(USE_CMSIS), yes)
-include cortex-m4/cmsis.mk
+include $(CURRENT_DIR)/cortex-m4/cmsis.mk
 endif
 
-include cortex-m4/devices.mk
-
-
+endif

@@ -1,7 +1,7 @@
 ARCH_TYPE:=cortex-m4
-DEVICE_TYPE:=stm32f407
-DEFINES:=STM32F40xx
+DEVICE_TYPE:=stm32f4xx
 USE_CMSIS:=yes
-USE_STDPERIPH:=no
+USE_STDPERIPH:=yes
+LIBC_IMPL:=newlib
 
-include arch/arch.mk
+include build/arch.mk
