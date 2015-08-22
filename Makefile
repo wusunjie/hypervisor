@@ -2,6 +2,8 @@ include config.mk
 
 export
 
+all: build_arch build_libs build_qpc
+
 build_arch:
 	make -C arch
 build_libs:
