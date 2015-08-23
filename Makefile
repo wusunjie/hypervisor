@@ -2,6 +2,9 @@ include config.mk
 
 export
 
+$(shell rm -rf $(OBJS_OUTPUT_DIR))
+$(shell mkdir $(OBJS_OUTPUT_DIR))
+
 all: build_arch build_libs build_qpc
 
 build_arch:
@@ -12,6 +15,4 @@ build_qpc:
 	make -C qpc
 
 clean:
-	make -C arch clean
-	make -C libs clean
-	make -C qpc clean
+	rm -rf $(OBJS_OUTPUT_DIR)

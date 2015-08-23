@@ -12,6 +12,4 @@ endif
 all:
 	$(CROSS_CC) $(SPECS) $(ARCH_OPTIONS) $(CFLAGS) -S $(QPC_PORT_SUBDIR)/*.s
 	$(CROSS_CC) $(SPECS) $(ARCH_OPTIONS) $(QPC_INC) $(CFLAGS) -c source/*.c
-
-clean:
-	rm -f *.o
+	mv *.o $(OBJS_OUTPUT_DIR)

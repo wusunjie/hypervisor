@@ -4,6 +4,4 @@ endif
 
 all:
 	$(CROSS_CC) $(SPECS) $(ARCH_OPTIONS) -c newlib/*.c
-
-clean:
-	rm -f *.o
+	mv $(shell pwd)/*.o $(OBJS_OUTPUT_DIR)

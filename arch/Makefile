@@ -4,6 +4,3 @@ endif
 
 all:
 	make -C $(ARCH_SUBDIR)
-
-clean:
-	make -C $(ARCH_SUBDIR) clean

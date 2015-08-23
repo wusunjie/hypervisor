@@ -34,10 +34,9 @@ endif
 all:
 ifeq ($(USE_CMSIS), yes)
 	$(CROSS_CC) $(SPECS) $(ARCH_OPTIONS) $(CFLAGS) $(CORTEX_M4_INC) -c device/*.c
+	mv $(shell pwd)/*.o $(OBJS_OUTPUT_DIR)
 ifeq ($(USE_STDPERIPH), yes)
 	$(CROSS_CC) $(SPECS) $(ARCH_OPTIONS) $(CFLAGS) $(CORTEX_M4_INC) -c $(STDPERIPH_SRC)
+	mv $(shell pwd)/*.o $(OBJS_OUTPUT_DIR)
 endif
 endif
-
-clean:
-	rm -f *.o

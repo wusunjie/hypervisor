@@ -8,6 +8,3 @@ export CORTEX_M4_INC
 
 all:
 	make -C $(CORTEX_M4_SUBDIR)
-
-clean:
-	make -C $(CORTEX_M4_SUBDIR) clean
