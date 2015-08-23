@@ -6,6 +6,8 @@ $(shell rm -rf $(OBJS_OUTPUT_DIR))
 $(shell mkdir $(OBJS_OUTPUT_DIR))
 
 all: build_arch build_libs build_qpc
+	$(CROSS_AR) -r out/platform.a out/*.o
+	rm -rf $(OBJS_OUTPUT_DIR)/*.o
 
 build_arch:
 	make -C arch
