@@ -25,7 +25,7 @@ DEFINES:= \
 
 all_objs:
 	$(CC) $(CC_OPTS) $(DEFINES) $(INCLUDE_PATH) $(SOURCE_FILES)
-	$(AS) $(AS_OPTS) $(ASM_FILES) -o qf_port.o
+	$(AS) $(AS_OPTS) $(ASM_FILES) -o qk_port.o
 
 clean_objs:
 	rm -f *.o
