@@ -6,7 +6,8 @@ else
 $(error this DEVICE_TYPE isn't supported now.)
 endif
 
-export
+export CC
+export CC_OPTS
 
 all_objs:
 	make -C $(SUBDIR)
