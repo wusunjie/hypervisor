@@ -52,6 +52,5 @@ DEFINES:= \
 all_objs:
 	$(CC) $(CC_OPTS) $(DEFINES) -DQ_NASSERT $(INCLUDE_PATH) $(SOURCE_FILES)
 	$(AS) $(AS_OPTS) $(ASM_FILES) -o qk_port.o
+	mv *.o $(ROOT_DIR)/objs
 
-clean_objs:
-	rm -f *.o

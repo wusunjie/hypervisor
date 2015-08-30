@@ -8,6 +8,5 @@ endif
 
 all_objs:
 	$(AS) $(AS_OPTS) $(SUBDIR)/*.s -o $(notdir $(shell pwd)).o
+	mv *.o $(ROOT_DIR)/objs
 
-clean_objs:
-	rm -f *.o

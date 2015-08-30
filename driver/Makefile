@@ -12,5 +12,3 @@ export CC_OPTS
 all_objs:
 	make -C $(SUBDIR)
 
-clean_objs:
-	make -C $(SUBDIR) clean_objs
