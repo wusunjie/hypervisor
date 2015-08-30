@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<model version="3.3.0">
+ <framework name="qpc"/>
+ <package name="port_filter" stereotype="0x02">
+  <class name="filter" superclass="qpc::QActive">
+   <attribute name="timer" type="QTimeEvt" visibility="0x02" properties="0x00"/>
+   <attribute name="count" type="uint32_t" visibility="0x02" properties="0x00"/>
+   <statechart>
+    <initial target="../1">
+     <action>me-&gt;count = 0;
+QTimeEvt_armX(&amp;me-&gt;timer, 0, 10);</action>
+     <initial_glyph conn="21,11,5,0,14,3">
+      <action box="6,-6,23,6"/>
+     </initial_glyph>
+    </initial>
+    <state name="PORT_OFF">
+     <tran trig="TIMEOUT">
+      <choice target="../../../2">
+       <guard>(1 == BSP_PORT_CHECK())</guard>
+       <choice_glyph conn="35,34,4,0,16">
+        <action box="1,3,12,6"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="35,22,2,-1,12">
+       <action box="0,1,10,2"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="28,14,13,8"/>
+    </state>
+    <state name="PORT_ON_C">
+     <tran trig="TIMEOUT">
+      <action>me-&gt;count++;</action>
+      <choice>
+       <guard>(me-&gt;count &lt; 10)</guard>
+       <choice target="../../../../1">
+        <guard>(0 == BSP_PORT_CHECK())</guard>
+        <action>me-&gt;count = 0;</action>
+        <choice_glyph conn="20,34,4,3,-16,8">
+         <action box="-6,-12,11,7"/>
+        </choice_glyph>
+       </choice>
+       <choice_glyph conn="20,44,4,-1,-10">
+        <action box="0,-6,12,4"/>
+       </choice_glyph>
+      </choice>
+      <choice target="../../../3">
+       <guard>else</guard>
+       <action>me-&gt;count = 0;</action>
+       <choice_glyph conn="20,44,5,2,-7,22,63,-8">
+        <action box="2,22,11,5"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="28,54,3,-1,-8,-10">
+       <action box="-11,0,10,5"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="28,50,13,8"/>
+    </state>
+    <state name="PORT_ON">
+     <tran trig="TIMEOUT">
+      <choice target="../../../4">
+       <guard>(0 == BSP_PORT_CHECK())</guard>
+       <choice_glyph conn="76,42,4,2,-10">
+        <action box="-17,-6,17,3"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="76,50,0,-1,-8">
+       <action box="0,-5,10,2"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="69,50,13,8"/>
+    </state>
+    <state name="PORT_OFF_C">
+     <tran trig="TIMEOUT">
+      <action>me-&gt;count++;</action>
+      <choice>
+       <guard>(me-&gt;count &lt; 10)</guard>
+       <choice target="../../../../3">
+        <guard>(1 == BSP_PORT_CHECK())</guard>
+        <action>me-&gt;count = 0;</action>
+        <choice_glyph conn="90,45,4,1,10,-8">
+         <action box="0,3,12,7"/>
+        </choice_glyph>
+       </choice>
+       <choice_glyph conn="90,37,4,-1,8">
+        <action box="-11,2,13,4"/>
+       </choice_glyph>
+      </choice>
+      <choice target="../../../1">
+       <guard>else</guard>
+       <choice_glyph conn="90,37,5,1,9,-19,-56,0,-2">
+        <action box="1,0,10,2"/>
+       </choice_glyph>
+      </choice>
+      <tran_glyph conn="82,28,1,-1,8,9">
+       <action box="1,-4,11,5"/>
+      </tran_glyph>
+     </tran>
+     <state_glyph node="69,24,13,8"/>
+    </state>
+    <state_diagram size="108,75"/>
+   </statechart>
+  </class>
+  <operation name="filter_ctor" type="void" visibility="0x00" properties="0x00">
+   <code>filter * const me = &amp;l_filter;
+QActive_ctor(&amp;me-&gt;super, Q_STATE_CAST(&amp;filter_initial));
+QTimeEvt_ctorX(&amp;me-&gt;timer, &amp;me-&gt;super, TIMEOUT_SIG, 0U);</code>
+  </operation>
+ </package>
+ <directory name="port_filter">
+  <file name="filter.c">
+   <text>#include &quot;qpc.h&quot;
+#include &quot;filter.h&quot;
+
+$declare(port_filter::filter)
+
+static filter l_filter;
+
+QActive * const AO_filter = &amp;l_filter.super;
+
+$define(port_filter::filter_ctor)
+$define(port_filter::filter)</text>
+  </file>
+  <file name="filter.h">
+   <text>#ifndef _FILTER_H
+#define _FILTER_H
+
+extern QActive * const AO_filter;
+
+$declare(port_filter::filter_ctor)
+
+#endif</text>
+  </file>
+ </directory>
+</model>
